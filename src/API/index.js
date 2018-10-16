@@ -7,19 +7,19 @@ class Helper {
     const keys = {
       client_id:"RKAGNFDO10DLQAG34Y0VJSRN3TQSTAYZWFDVKYWDS3TXSJ1Q",
       client_secret:"OMZ4PHNVOSXGHI5WTHG34AAVQJZDRXCNAD3AVVOQAV3HVQH0",
-      v:"20181007"
+      v:"20181009"
     };
     return Object.keys(keys)
       .map(key => `${key}=${keys[key]}`)
       .join("&");
   }
 
-  static urlBuilder(urlParams) {
-    if(!urlParams) {
+  static urlBuilder(urlPrams) {
+    if(!urlPrams) {
       return ""
     }
-    return Object.keys(urlParams)
-      .map(key => `${key}=${urlParams[key]}`)
+    return Object.keys(urlPrams)
+      .map(key => `${key}=${urlPrams[key]}`)
       .join("&");
   }
 
@@ -29,7 +29,7 @@ class Helper {
     };
   }
 
-  static simpleFetch(endPoint, method, urlParams) {
+  static simpleFetch(endPoint, method, urlPrams) {
     let requestData = {
       method,
       headers: Helper.headers()
@@ -37,7 +37,7 @@ class Helper {
 
     return fetch(
       `${Helper.baseURL()}${endPoint}?${Helper.auth()}&${Helper.urlBuilder(
-        urlParams
+        urlPrams
       )}`,
       requestData
     ).then(res => res.json());
@@ -45,13 +45,13 @@ class Helper {
 }
 
 export default class SquareAPI {
-  static search(urlParams){
-    return Helper.simpleFetch("/venues/search", "GET", urlParams);
+  static search(urlPrams){
+    return Helper.simpleFetch("/venues/search", "GET", urlPrams);
   }
   static getVenueDetails(VENUE_ID){
-    return Helper.simpleFetch(`venues/${VENUE_ID}`, "GET");
+    return Helper.simpleFetch(`/venues/${VENUE_ID}`, "GET");
   }
   static getVenuePhotos(VENUE_ID){
-    return Helper.simpleFetch(`venues/${VENUE_ID}/photos`, "GET");
+    return Helper.simpleFetch(`/venues/${VENUE_ID}/photos`, "GET");
   }
 }
