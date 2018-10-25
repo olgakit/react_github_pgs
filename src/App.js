@@ -4,6 +4,7 @@ import SquareAPI from './API/';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
 
+
 class App extends Component {
   constructor() {
     super();
@@ -26,12 +27,15 @@ class App extends Component {
     });
     this.setState({ markers: Object.assign(this.state.markers, markers) });
   }
+
+  
   handleMarkerClick = marker => {
     this.closeAllMarkers();
     marker.isOpen = true;
+  
     this.setState({ markers: Object.assign(this.state.markers, marker) });
     const venue = this.state.venues.find(venue => venue.id === marker.id);
-
+   
     SquareAPI.getVenueDetails(marker.id).then( res => {
       const newLocation = Object.assign(venue, res.response.venue);
       this.setState({venues: Object.assign(this.state.venues, newLocation)});
@@ -42,12 +46,12 @@ class App extends Component {
     const marker = this.state.markers.find(marker => marker.id === venue.id);
     this.handleMarkerClick(marker);
   }
-
+  
   componentDidMount() {
     SquareAPI.search({
       near: "Moscow, Russia",
       query: "музеи",
-      limit: 10
+      limit: 15
     }).then(results => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;

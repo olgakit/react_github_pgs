@@ -46,6 +46,15 @@ ul.locations {
   cursor: pointer;
 }
 
+.infoWindow {
+  max-width: 200px;
+}
+
+div.gm-style-iw {
+  width: 200px;
+  height: 200px;
+}
+
 @viewport {
   zoom: 1.0;
 }

@@ -6,7 +6,9 @@ export default class Locations extends Component {
     return(
       <ul className="locations">
         {this.props.venues && this.props.venues.map((venue, idx) => (<OneLocation key={idx} {...venue}
-        handleOneLocationClick={this.props.handleOneLocationClick} />))}
+        handleOneLocationClick={this.props.handleOneLocationClick} 
+        
+        />))}
       </ul>
     );
   }

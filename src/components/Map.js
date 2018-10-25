@@ -1,9 +1,11 @@
+/* global google */
 import React, { Component } from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
 
 const MyMapComponent = withScriptjs(
+  
   withGoogleMap(props => (
-    <GoogleMap defaultZoom={12} zoom={props.zoom} 
+    <GoogleMap defaultZoom={10} zoom={props.zoom} 
       style={props.styles}
       defaultCenter={{ lat: 55.819851, lng: 37.611695 }} center={props.center}
       //"mesfer" custom map styling is borrowed from Snazzy Maps: https://snazzymaps.com/style/230357/mesfer
@@ -11,9 +13,15 @@ const MyMapComponent = withScriptjs(
       {props.markers && props.markers.filter(marker => marker.isVisible).map((marker,idx)=> {
         const venueDetails = props.venues.find(venue => venue.id === marker.id);
         return <Marker key={idx} position={{ lat: marker.lat, lng: marker.lng }} 
-          onClick={() => props.handleMarkerClick(marker)}>
+          onClick={() => props.handleMarkerClick(marker)} 
+          //set animation to bounce when marker is clicked
+          animation = {marker.isOpen===true
+            ? google.maps.Animation.BOUNCE
+            : null
+          }
+          >
           {marker.isOpen && venueDetails.bestPhoto && (
-            <InfoWindow>
+            <InfoWindow >
               <React.Fragment>
                 <img src={`${venueDetails.bestPhoto.prefix}175x175${venueDetails.bestPhoto.suffix}`} alt={venueDetails.categories[0].name} />
                 <p>{venueDetails.name}</p>
@@ -29,6 +37,7 @@ const MyMapComponent = withScriptjs(
 export default class Map extends Component {
   
   render() {
+  
     return(
       <MyMapComponent
         {...this.props}
