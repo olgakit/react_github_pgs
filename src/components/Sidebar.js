@@ -9,6 +9,7 @@ export default class Sidebar extends Component {
       venues: []
     };
   }
+  //match all available venues with query characters, not case sensitive
   handleFilter = () => {
     if(this.state.query.trim() !== "") {
       const venues = this.props.venues.filter(venue => 
@@ -18,6 +19,7 @@ export default class Sidebar extends Component {
     }
     return this.props.venues;
   }
+  //reflect the new list of locations by displaying the matching markers on the map 
   handleChange = event => {
     this.setState({query:event.target.value});
     const markers = this.props.venues.map(venue => {
@@ -33,7 +35,8 @@ export default class Sidebar extends Component {
     this.props.updateSuperState({markers});
   }
   render() {
-    return(<div className="sidebar">
+    return(<div id={"sidebar"}>
+      <h2>Moscow Museums</h2>
       <input type={"search"} id={"search"} placeholder={"Filter Locations"} onChange={this.handleChange} />
       <Locations {...this.props} venues={this.handleFilter()} handleOneLocationClick = {this.props.handleOneLocationClick} />
     </div>)

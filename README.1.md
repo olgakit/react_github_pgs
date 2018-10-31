@@ -13,4 +13,5 @@ Neighborhood Map: .
 Imported Google Maps library: https://tomchentw.github.io/react-google-maps/ (used Step 4)
 "mesfer" custom map styling is borrowed from Snazzy Maps: https://snazzymaps.com/style/230357/mesfer
 
+Hamburger Menu Icon credit to Font Awesome: https://fontawesome.com/
 

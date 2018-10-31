@@ -3,6 +3,7 @@ import './App.css';
 import SquareAPI from './API/';
 import Map from './components/Map';
 import Sidebar from './components/Sidebar';
+import UpperMenu from './components/UpperMenu';
 
 
 class App extends Component {
@@ -18,6 +19,7 @@ class App extends Component {
         this.setState(obj);
       }
     }
+    this.toggleSideBar = this.toggleSideBar.bind(this);
   }
   
   closeAllMarkers = () => {
@@ -30,28 +32,38 @@ class App extends Component {
 
   
   handleMarkerClick = marker => {
+    //first close any prev open markers
     this.closeAllMarkers();
     marker.isOpen = true;
-  
+    
     this.setState({ markers: Object.assign(this.state.markers, marker) });
     const venue = this.state.venues.find(venue => venue.id === marker.id);
-   
+    //link current marker with the venue info
     SquareAPI.getVenueDetails(marker.id).then( res => {
       const newLocation = Object.assign(venue, res.response.venue);
       this.setState({venues: Object.assign(this.state.venues, newLocation)});
     });
+
+    //hide sidebar when marker or venue is clicked and the window is less than 499px
+    const sidebar = document.getElementById("sidebar");
+    
+    if (window.matchMedia("(max-width: 499px)").matches) {
+      ((sidebar.style.maxWidth = '0%') && (sidebar.style.minWidth = '0%'));
+    } else if (window.matchMedia("(mix-width: 500px)").matches){
+      ((sidebar.style.maxWidth = '25%') && (sidebar.style.minWidth = '250px'));
+    }
   }
 
   handleOneLocationClick = venue => {
     const marker = this.state.markers.find(marker => marker.id === venue.id);
     this.handleMarkerClick(marker);
   }
-  
+
   componentDidMount() {
     SquareAPI.search({
       near: "Moscow, Russia",
       query: "музеи",
-      limit: 15
+      limit: 30
     }).then(results => {
       const { venues } = results.response;
       const { center } = results.response.geocode.feature.geometry;
@@ -67,12 +79,29 @@ class App extends Component {
       this.setState({venues, center, markers});
     });
   }
+  //hide or show SideBar on the burger icon click 
+  toggleSideBar () {
+    const sidebar = document.getElementById("sidebar");
+
+    if((sidebar.style.maxWidth === '25%') || (sidebar.style.minWidth === '250px')) {
+      ((sidebar.style.maxWidth = '0%') && (sidebar.style.minWidth = '0%'));
+    } else {
+      ((sidebar.style.maxWidth = '25%') && (sidebar.style.minWidth = '250px'));
+    }
+  }
+
 
   render() {
     return(
       <div className="App"> 
-        <Sidebar {...this.state} handleOneLocationClick = {this.handleOneLocationClick}/>
-        <Map {...this.state} handleMarkerClick = {this.handleMarkerClick}/>
+        <Sidebar {...this.state} 
+        handleOneLocationClick = {this.handleOneLocationClick}
+        toggleSideBar={this.toggleSideBar}/>
+        <div className="rightSide">
+          <UpperMenu 
+          toggleSideBar={this.toggleSideBar}/>
+          <Map {...this.state} handleMarkerClick = {this.handleMarkerClick}/>
+        </div>
       </div>
     );
   }
