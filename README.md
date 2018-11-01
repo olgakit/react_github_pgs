@@ -9,7 +9,8 @@ Neighborhood Map: Application showing museum locations in Moscow. The list of mu
 
 ## Instructions ##
 
-To run the application locally, clone the github repository:
+To run the application locally, clone the github repository: https://github.com/olgakit/neighborhood_map.
+
 In the code editor, run 'npm install' and 'npm start' to open the localhost.
 
 ## Credits ##
