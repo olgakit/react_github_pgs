@@ -37,7 +37,7 @@ export default class Sidebar extends Component {
   render() {
     return(<div id={"sidebar"}>
       <h2>Moscow Museums</h2>
-      <input type={"search"} id={"search"} placeholder={"Filter Locations"} onChange={this.handleChange} />
+      <input tabIndex="1" type={"search"} id={"search"} placeholder={"Filter Locations"} onChange={this.handleChange} />
       <Locations {...this.props} venues={this.handleFilter()} handleOneLocationClick = {this.props.handleOneLocationClick} />
     </div>)
   }

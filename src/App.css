@@ -101,15 +101,10 @@ ul.locations {
 }
 
 @media screen and (max-width: 450px) and (min-width: 320px) {
- 
+  .gm-style-iw {
+    height: 200px !important;
+    width: 175px !important;
+  }
 }
  
-
-@media screen and (max-width: 599px) {
- 
-}
-
-@media screen and (max-width: 600px) {
-  
-}
 

@@ -46,7 +46,6 @@ class App extends Component {
 
     //hide sidebar when marker or venue is clicked and the window is less than 499px
     const sidebar = document.getElementById("sidebar");
-    
     if (window.matchMedia("(max-width: 499px)").matches) {
       ((sidebar.style.maxWidth = '0%') && (sidebar.style.minWidth = '0%'));
     } else if (window.matchMedia("(mix-width: 500px)").matches){
@@ -77,6 +76,8 @@ class App extends Component {
         };
       });
       this.setState({venues, center, markers});
+    }).catch(error => {
+      alert('The following error occurred while loading: ' + error);
     });
   }
   //hide or show SideBar on the burger icon click 
@@ -84,9 +85,9 @@ class App extends Component {
     const sidebar = document.getElementById("sidebar");
 
     if((sidebar.style.maxWidth === '25%') || (sidebar.style.minWidth === '250px')) {
-      ((sidebar.style.maxWidth = '0%') && (sidebar.style.minWidth = '0%'));
+      (sidebar.style.maxWidth = '0%') && (sidebar.style.minWidth = '0%');
     } else {
-      ((sidebar.style.maxWidth = '25%') && (sidebar.style.minWidth = '250px'));
+      (sidebar.style.maxWidth = '25%') && (sidebar.style.minWidth = '250px');
     }
   }
 
@@ -96,10 +97,11 @@ class App extends Component {
       <div className="App"> 
         <Sidebar {...this.state} 
         handleOneLocationClick = {this.handleOneLocationClick}
-        toggleSideBar={this.toggleSideBar}/>
+        />
         <div className="rightSide">
           <UpperMenu 
-          toggleSideBar={this.toggleSideBar}/>
+          toggleSideBar={this.toggleSideBar}
+          />
           <Map {...this.state} handleMarkerClick = {this.handleMarkerClick}/>
         </div>
       </div>
