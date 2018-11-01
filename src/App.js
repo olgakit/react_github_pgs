@@ -51,6 +51,12 @@ class App extends Component {
     } else if (window.matchMedia("(mix-width: 500px)").matches){
       ((sidebar.style.maxWidth = '25%') && (sidebar.style.minWidth = '250px'));
     }
+    //if esc is pressed, close open marker
+    document.addEventListener('keyup', (e) => {
+      if (e.keyCode === 27) {
+        this.closeAllMarkers();
+      }
+    });
   }
 
   handleOneLocationClick = venue => {

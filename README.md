@@ -9,22 +9,20 @@ Neighborhood Map: Application showing museum locations in Moscow. The list of mu
 
 ## Instructions ##
 
-<<<<<<< HEADggit
 To run the application locally, clone the github repository: https://github.com/olgakit/neighborhood_map.
 
-||||||| merged common ancestors
-To run the application locally, clone the github repository:
-=======
-To run the application locally, clone the github repository: https://github.com/olgakit/neighborhood_map.
->>>>>>> f6f9d7ba925021e80418f16cf5245824b95f89b7
 In the code editor, run 'npm install' and 'npm start' to open the localhost.
 
 ## Credits ##
 
 Imported Google Maps library: https://tomchentw.github.io/react-google-maps/ (used Step 4)
+
 "mesfer" custom map styling is borrowed from Snazzy Maps: https://snazzymaps.com/style/230357/mesfer
 
 Hamburger Menu Icon credit to Font Awesome: https://fontawesome.com/
+
+Using screen width in if-statement: 
+https://techstacker.com/posts/XXjho5wLJdLzFNDpT/javascript-detect-if-screen-width-is-greater-or-less-than
 
 ## Contributing ##
 
