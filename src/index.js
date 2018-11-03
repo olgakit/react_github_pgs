@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorker from './build/service-worker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
@@ -13,7 +13,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
-      navigator.serviceWorker.register('/service-worker.js');
+      navigator.serviceWorker.register('/build/service-worker.js');
     });
 }
   
